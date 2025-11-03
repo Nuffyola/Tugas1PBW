@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistem UT</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Sistem UT</span>
+            </div>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="dashboard.html" class="nav-link active">
+                    <span class="nav-icon">🏠</span>
+                    <span>Beranda</span>
+                </a>
+                <a href="stock.html" class="nav-link">
+                    <span class="nav-icon">📖</span>
+                    <span>Materi</span>
+                </a>
+                <a href="tracking.html" class="nav-link">
+                    <span class="nav-icon">📦</span>
+                    <span>Pelacakan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="reports">
+                    <span class="nav-icon">📊</span>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="summary">
+                    <span class="nav-icon">📋</span>
+                    <span>Ringkasan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="history">
+                    <span class="nav-icon">🕒</span>
+                    <span>Riwayat</span>
+                </a>
+            </nav>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-name" id="userName">Pengguna</span>
+                    <span class="user-role" id="userRole">Peran</span>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Keluar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Greeting Section -->
+        <section class="greeting-section">
+            <div class="greeting-content">
+                <h1 class="greeting-title" id="greetingTitle">Selamat Pagi</h1>
+                <p class="greeting-subtitle" id="greetingSubtitle">Selamat datang kembali, <span id="greetingName">Pengguna</span>!</p>
+                <p class="greeting-date" id="greetingDate"></p>
+            </div>
+            <div class="greeting-icon">
+                <span id="greetingEmoji">☀️</span>
+            </div>
+        </section>
+
+        <!-- Dashboard Cards -->
+        <section class="dashboard-cards">
+            <div class="card card-primary" onclick="window.location.href='stock.html'">
+                <div class="card-icon">📖</div>
+                <div class="card-content">
+                    <h3>Materi Pembelajaran</h3>
+                    <p>Lihat dan kelola materi pengajaran</p>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <div class="card card-secondary" onclick="window.location.href='tracking.html'">
+                <div class="card-icon">📦</div>
+                <div class="card-content">
+                    <h3>Pelacakan Pengiriman</h3>
+                    <p>Lacak kiriman Anda</p>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <div class="card card-accent" data-page="reports">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <h3>Laporan</h3>
+                    <p>Buat dan lihat laporan</p>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <div class="card card-info" data-page="monitoring">
+                <div class="card-icon">📈</div>
+                <div class="card-content">
+                    <h3>Pemantauan Progres</h3>
+                    <p>Lacak progres pesanan pengiriman</p>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <div class="card card-success" data-page="summary">
+                <div class="card-icon">📋</div>
+                <div class="card-content">
+                    <h3>Ringkasan Materi</h3>
+                    <p>Lihat statistik materi</p>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <div class="card card-warning" data-page="history">
+                <div class="card-icon">🕒</div>
+                <div class="card-content">
+                    <h3>Riwayat Transaksi</h3>
+                    <p>Lihat transaksi sebelumnya</p>
+                </div>
+                <div class="card-arrow">→</div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats">
+            <h2 class="section-title">Gambaran Umum</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Total Materi</p>
+                        <p class="stat-value" id="totalMaterials">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Terkirim</p>
+                        <p class="stat-value" id="deliveredCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚚</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Dalam Perjalanan</p>
+                        <p class="stat-value" id="inTransitCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Total Stok</p>
+                        <p class="stat-value" id="totalStock">0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Materials -->
+        <section class="recent-materials">
+            <h2 class="section-title">Materi Terbaru</h2>
+            <div class="materials-preview" id="materialsPreview">
+                <!-- Material preview will be inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

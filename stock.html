@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Pembelajaran - Sistem UT</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/stock.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Sistem UT</span>
+            </div>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    <span>Beranda</span>
+                </a>
+                <a href="stock.html" class="nav-link active">
+                    <span class="nav-icon">📖</span>
+                    <span>Materi</span>
+                </a>
+                <a href="tracking.html" class="nav-link">
+                    <span class="nav-icon">📦</span>
+                    <span>Pelacakan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="reports">
+                    <span class="nav-icon">📊</span>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="summary">
+                    <span class="nav-icon">📋</span>
+                    <span>Ringkasan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="history">
+                    <span class="nav-icon">🕒</span>
+                    <span>Riwayat</span>
+                </a>
+            </nav>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-name" id="userName">Pengguna</span>
+                    <span class="user-role" id="userRole">Peran</span>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Keluar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>📖 Stok Materi Pembelajaran</h1>
+                <p>Kelola inventori materi pengajaran Anda</p>
+            </div>
+            <button class="btn-add" id="btnAddMaterial">
+                <span>➕</span>
+                Tambah Materi Baru
+            </button>
+        </div>
+
+        <!-- Search and Filter -->
+        <section class="toolbar">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Cari materi..."
+                    class="search-input"
+                >
+            </div>
+            <div class="filter-box">
+                <select id="filterLocation" class="filter-select">
+                    <option value="">Semua Lokasi</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Materials Grid -->
+        <section class="materials-grid" id="materialsGrid">
+            <!-- Material cards will be inserted here -->
+        </section>
+
+        <!-- No Results -->
+        <section class="no-materials" id="noMaterials" style="display: none;">
+            <div class="no-materials-icon">📭</div>
+            <h3>Materi tidak ditemukan</h3>
+            <p>Coba sesuaikan pencarian atau filter Anda</p>
+        </section>
+    </main>
+
+    <!-- Add/Edit Material Dialog -->
+    <div class="dialog-overlay" id="dialogOverlay">
+        <div class="dialog" role="dialog" aria-modal="true">
+            <div class="dialog-header">
+                <h2 id="dialogTitle">Tambah Materi Baru</h2>
+                <button class="dialog-close" id="dialogClose" aria-label="Tutup">×</button>
+            </div>
+            
+            <form id="materialForm" class="dialog-content">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="itemCode">Kode Item *</label>
+                        <input type="text" id="itemCode" required placeholder="cth., ASIP4301">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="locationCode">Kode Lokasi *</label>
+                        <input type="text" id="locationCode" required placeholder="cth., 0TMP01">
+                    </div>
+                    
+                    <div class="form-field full-width">
+                        <label for="itemName">Nama Materi *</label>
+                        <input type="text" id="itemName" required placeholder="cth., Pengantar Ilmu Komunikasi">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="itemType">Tipe *</label>
+                        <select id="itemType" required>
+                            <option value="">Pilih tipe</option>
+                            <option value="BMP">BMP</option>
+                            <option value="Non-BMP">Non-BMP</option>
+                            <option value="Modul">Modul</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="edition">Edisi *</label>
+                        <input type="number" id="edition" required min="1" placeholder="cth., 2">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="stock">Jumlah Stok *</label>
+                        <input type="number" id="stock" required min="0" placeholder="cth., 548">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="cover">Gambar Sampul</label>
+                        <input type="text" id="cover" placeholder="img/cover.jpg">
+                    </div>
+                </div>
+                
+                <div class="dialog-footer">
+                    <button type="button" class="btn-secondary" id="btnCancel">Batal</button>
+                    <button type="submit" class="btn-primary" id="btnSubmit">
+                        <span id="submitText">Tambah Materi</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Dialog -->
+    <div class="dialog-overlay" id="deleteDialogOverlay">
+        <div class="dialog dialog-small" role="dialog" aria-modal="true">
+            <div class="dialog-header">
+                <h2>Konfirmasi Hapus</h2>
+                <button class="dialog-close" id="deleteDialogClose" aria-label="Tutup">×</button>
+            </div>
+            
+            <div class="dialog-content">
+                <p class="delete-message">Apakah Anda yakin ingin menghapus materi ini?</p>
+                <p class="delete-details" id="deleteDetails"></p>
+                
+                <div class="dialog-footer">
+                    <button type="button" class="btn-secondary" id="btnCancelDelete">Batal</button>
+                    <button type="button" class="btn-danger" id="btnConfirmDelete">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Place Order Dialog -->
+    <div class="dialog-overlay" id="orderDialogOverlay">
+        <div class="dialog" role="dialog" aria-modal="true">
+            <div class="dialog-header">
+                <h2>📦 Buat Pesanan</h2>
+                <button class="dialog-close" id="orderDialogClose" aria-label="Tutup">×</button>
+            </div>
+            
+            <form id="orderForm" class="dialog-content">
+                <div class="order-material-info" id="orderMaterialInfo">
+                    <!-- Material info will be inserted here -->
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-field full-width">
+                        <label for="customerName">Nama Pelanggan *</label>
+                        <input type="text" id="customerName" required placeholder="Masukkan nama pelanggan">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="customerEmail">Email *</label>
+                        <input type="email" id="customerEmail" required placeholder="pelanggan@contoh.com">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="customerPhone">Nomor Telepon *</label>
+                        <input type="tel" id="customerPhone" required placeholder="+62 xxx xxxx xxxx">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="orderQuantity">Jumlah *</label>
+                        <input type="number" id="orderQuantity" required min="1" placeholder="Masukkan jumlah">
+                    </div>
+                    
+                    <div class="form-field full-width">
+                        <label for="deliveryAddress">Alamat Pengiriman *</label>
+                        <textarea id="deliveryAddress" required placeholder="Masukkan alamat pengiriman lengkap" rows="3" style="resize: vertical; font-family: inherit;"></textarea>
+                    </div>
+                    
+                    <div class="form-field full-width">
+                        <label for="orderNotes">Catatan (Opsional)</label>
+                        <textarea id="orderNotes" placeholder="Instruksi khusus atau catatan" rows="2" style="resize: vertical; font-family: inherit;"></textarea>
+                    </div>
+                </div>
+                
+                <div class="dialog-footer">
+                    <button type="button" class="btn-secondary" id="btnCancelOrder">Batal</button>
+                    <button type="submit" class="btn-primary">Kirim Pesanan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/stock.js"></script>
+</body>
+</html>

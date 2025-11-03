@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelacakan Pengiriman - Sistem UT</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/tracking.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">Sistem UT</span>
+            </div>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    <span>Beranda</span>
+                </a>
+                <a href="stock.html" class="nav-link">
+                    <span class="nav-icon">📖</span>
+                    <span>Materi</span>
+                </a>
+                <a href="tracking.html" class="nav-link active">
+                    <span class="nav-icon">📦</span>
+                    <span>Pelacakan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="reports">
+                    <span class="nav-icon">📊</span>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="summary">
+                    <span class="nav-icon">📋</span>
+                    <span>Ringkasan</span>
+                </a>
+                <a href="#" class="nav-link" data-page="history">
+                    <span class="nav-icon">🕒</span>
+                    <span>Riwayat</span>
+                </a>
+            </nav>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-name" id="userName">Pengguna</span>
+                    <span class="user-role" id="userRole">Peran</span>
+                </div>
+                <button class="logout-btn" id="logoutBtn">Keluar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>📦 Pelacakan Pengiriman</h1>
+            <p>Lacak pesanan pengiriman Anda</p>
+        </div>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="trackingInput" 
+                    placeholder="Masukkan nomor pelacakan atau nama..."
+                    class="search-input"
+                >
+                <button id="searchBtn" class="search-btn">Cari</button>
+            </div>
+        </section>
+
+        <!-- Tracking Result -->
+        <section class="tracking-result" id="trackingResult" style="display: none;">
+            <div class="result-card">
+                <div class="result-header">
+                    <div class="result-info">
+                        <h2 id="resultOrderNumber">DO #2023001234</h2>
+                        <p id="resultName">Penerima: Rina Wulandari</p>
+                    </div>
+                    <div class="status-badge" id="statusBadge">Dalam Perjalanan</div>
+                </div>
+                
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Kurir</span>
+                        <span class="detail-value" id="resultCourier">JNE</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Tanggal Kirim</span>
+                        <span class="detail-value" id="resultDate">2025-08-25</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Paket</span>
+                        <span class="detail-value" id="resultPackage">0JKT01</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Total</span>
+                        <span class="detail-value" id="resultTotal">Rp 180,000</span>
+                    </div>
+                </div>
+
+                <div class="tracking-timeline" id="trackingTimeline">
+                    <!-- Timeline items will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- No Results Message -->
+        <section class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3>Informasi pelacakan tidak ditemukan</h3>
+            <p>Silakan periksa nomor pelacakan Anda dan coba lagi</p>
+        </section>
+
+        <!-- All Orders List -->
+        <section class="all-orders">
+            <h2 class="section-title">Semua Pesanan Pengiriman</h2>
+            <div class="orders-grid" id="ordersGrid">
+                <!-- Orders will be inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/tracking.js"></script>
+</body>
+</html>
